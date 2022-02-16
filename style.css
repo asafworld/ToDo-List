@@ -1,11 +1,13 @@
-/* .liStyle {
-    background-color: gray;
-}
-
-.white {
-    background-color: white;
-} */
-
 .completed {
     text-decoration: line-through solid black;
+}
+
+body {
+    text-align: center;
+    margin-top: 20%;
+}
+
+li {
+  width: 15%;
+  margin-left: 40%;
 }

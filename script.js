@@ -12,28 +12,41 @@ main.appendChild(buttonCriaTarefa);
 
 buttonCriaTarefa.addEventListener('click', function(event) {
   const liTarefa = document.createElement('li');
-  liTarefa.classList = 'white';
   liTarefa.innerHTML = input.value;
+  liTarefa.classList = 'tarefa'
   taskList.appendChild(liTarefa);
-  input.value = '';
-
-  function addRemoveStyle(event){
-      let lines = document.querySelectorAll('li');
-      for (let i = 0; i < lines.length; i+= 1){
-        lines[i].style.backgroundColor = 'white';
-        event.target.style.backgroundColor = 'gray';
-      }
-  }
+  input.value = ''; 
   liTarefa.addEventListener('click', addRemoveStyle);
-
-  liTarefa.addEventListener('dblclick', function(e){
-    // let lines = document.querySelectorAll('li');
-    // for (let i = 0; i < lines.length; i+= 1){
-        if (e.target.className === 'white completed'){
-            e.target.classList.remove('completed');
-          } else {
-            e.target.classList.add('completed');
-          }
-    // }
-  })
+  liTarefa.addEventListener('dblclick', addRemoveLineThrough);
 })
+
+function addRemoveStyle(event){
+    let lines = document.querySelectorAll('li');
+    for (let i = 0; i < lines.length; i += 1) {
+      lines[i].style.backgroundColor = 'white';
+      event.target.style.backgroundColor = 'gray';
+    }
+}
+
+function addRemoveLineThrough(e){
+    if (e.target.className === 'tarefa completed') {
+        e.target.classList.remove('completed');
+      } else {
+        e.target.classList.add('completed');
+      }
+}
+
+const deleteButton = document.createElement('button');
+deleteButton.id = 'apaga-tudo';
+deleteButton.innerHTML = 'Apagar tudo'
+main.appendChild(deleteButton);
+
+function deleteItAll(){
+    const lines = document.querySelectorAll('li');
+    for (let i = 0; i < lines.length; i +=1) {
+        lines[i].remove();
+    };
+};
+
+deleteButton.addEventListener('click', deleteItAll);
+
