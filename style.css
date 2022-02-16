@@ -1,4 +1,11 @@
-.liStyle {
+/* .liStyle {
     background-color: gray;
 }
 
+.white {
+    background-color: white;
+} */
+
+.completed {
+    text-decoration: line-through solid black;
+}

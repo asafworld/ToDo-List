@@ -12,18 +12,28 @@ main.appendChild(buttonCriaTarefa);
 
 buttonCriaTarefa.addEventListener('click', function(event) {
   const liTarefa = document.createElement('li');
+  liTarefa.classList = 'white';
   liTarefa.innerHTML = input.value;
   taskList.appendChild(liTarefa);
   input.value = '';
+
+  function addRemoveStyle(event){
+      let lines = document.querySelectorAll('li');
+      for (let i = 0; i < lines.length; i+= 1){
+        lines[i].style.backgroundColor = 'white';
+        event.target.style.backgroundColor = 'gray';
+      }
+  }
+  liTarefa.addEventListener('click', addRemoveStyle);
+
+  liTarefa.addEventListener('dblclick', function(e){
+    // let lines = document.querySelectorAll('li');
+    // for (let i = 0; i < lines.length; i+= 1){
+        if (e.target.className === 'white completed'){
+            e.target.classList.remove('completed');
+          } else {
+            e.target.classList.add('completed');
+          }
+    // }
+  })
 })
-
-let liTarefas = document.getElementsByTagName('li');
-
-function addBackgroundColorLi() {
-  for (let i = 0; i < liTarefas.length; i += 1){
-    liTarefas[i].addEventListener('click', function(event) {
-      liTarefas[i].classList.add('liStyle');
-    });
-  };
-};
-addBackgroundColorLi();
