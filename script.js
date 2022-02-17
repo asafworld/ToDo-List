@@ -9,7 +9,7 @@ buttonCriaTarefa.id = 'criar-tarefa';
 buttonCriaTarefa.innerHTML = 'Cria Tarefa';
 main.appendChild(buttonCriaTarefa);
 
-function addRemoveStyle(event){
+function addRemoveStyle(event) {
     let lines = document.querySelectorAll('li');
     for (let i = 0; i < lines.length; i += 1) {
       lines[i].style.backgroundColor = '#9e2e3d';
