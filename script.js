@@ -1,7 +1,5 @@
 const main = document.getElementById('main');
 const input = document.getElementById('texto-tarefa');
-
-
 const taskList = document.createElement('ol');
 taskList.id = 'lista-tarefas';
 main.appendChild(taskList);
@@ -38,6 +36,25 @@ buttonCriaTarefa.addEventListener('click', function(event) {
   saveButtonFunction
 })
 
+let saveButton = document.createElement('button');
+saveButton.id = 'salvar-tarefas';
+saveButton.innerHTML = "Salvar";
+main.appendChild(saveButton);
+
+
+  saveButton.addEventListener('click', saveButtonFunction);
+  function saveButtonFunction(){
+    const olSaved = document.getElementsByTagName('ol')[0];
+    window.localStorage.setItem('tarefas', olSaved.innerHTML);
+  }
+  
+  window.onload = function(){
+    const myStorageSaved = localStorage.getItem('tarefas');
+    const olSaved = document.getElementsByTagName('ol')[0];
+    olSaved.innerHTML = myStorageSaved;
+    olSaved.addEventListener('click', addRemoveStyle);
+  }
+
 const deleteButton = document.createElement('button');
 deleteButton.id = 'apaga-tudo';
 deleteButton.innerHTML = 'Apagar tudo'
@@ -66,24 +83,3 @@ function deleteFinalizados(){
 }
 
 deleteButtonFinalizados.addEventListener('click', deleteFinalizados);
-
-let saveButton = document.createElement('button');
-saveButton.id = 'salvar-tarefas';
-saveButton.innerHTML = "Salvar";
-main.appendChild(saveButton);
-
-
-  saveButton.addEventListener('click', saveButtonFunction);
-  function saveButtonFunction(){
-    const olSaved = document.getElementsByTagName('ol')[0];
-    window.localStorage.setItem('tarefas', olSaved.innerHTML);
-  }
-  
-  window.onload = function(){
-    const myStorageSaved = localStorage.getItem('tarefas');
-    const olSaved = document.getElementsByTagName('ol')[0];
-    olSaved.innerHTML = myStorageSaved;
-    console.log(myStorageSaved);
-  }
- 
-  
