@@ -12,13 +12,15 @@ main.appendChild(buttonCriaTarefa);
 function addRemoveStyle(event){
     let lines = document.querySelectorAll('li');
     for (let i = 0; i < lines.length; i += 1) {
-      lines[i].style.backgroundColor = 'white';
+      lines[i].style.backgroundColor = '#9e2e3d';
       event.target.style.backgroundColor = 'gray';
+      lines[i].classList.remove('selected');
+      event.target.classList.add('selected');
     }
 }
 
 function addRemoveLineThrough(e){
-    if (e.target.className === 'tarefa completed') {
+    if (e.target.className === 'tarefa completed' || e.target.className === 'tarefa selected completed' || e.target.className === 'tarefa completed selected') {
         e.target.classList.remove('completed');
       } else {
         e.target.classList.add('completed');
@@ -83,3 +85,52 @@ function deleteFinalizados(){
 }
 
 deleteButtonFinalizados.addEventListener('click', deleteFinalizados);
+
+const buttonUp = document.createElement('button');
+buttonUp.id = 'mover-cima';
+buttonUp.innerHTML = 'Subir prioridade';
+main.appendChild(buttonUp);
+const buttonDown = document.createElement('button');
+buttonDown.id = 'mover-baixo';
+buttonDown.innerHTML = 'Descer prioridade';
+main.appendChild(buttonDown);
+
+function moveUp(){
+  const tasklist = document.querySelector('ol');
+  const selected = document.querySelector('.selected');
+  
+  if (selected  && selected.previousElementSibling !== null){
+    const letPreviousSibling = selected.previousElementSibling;
+    taskList.insertBefore(selected, letPreviousSibling);
+  } else {
+    window.alert('Primeiro elemento não move para cima.')
+  }
+}
+// moveUp()
+
+buttonUp.addEventListener('click', moveUp);
+
+function moveDown(){
+  const tasklist = document.querySelector('ol');
+  const selected = document.querySelector('.selected');
+  if (selected && selected.nextElementSibling !== null){
+    const letNextSibling = selected.nextElementSibling;
+    taskList.insertBefore(selected, letNextSibling.nextElementSibling);
+  } else {
+    window.alert('Último elemento não move para baixo.');
+  } 
+}
+
+buttonDown.addEventListener('click', moveDown);
+
+const deleteSelectedButton = document.createElement('button');
+deleteSelectedButton.id = 'remover-selecionado';
+deleteSelectedButton.innerHTML = 'Apagar selecionado';
+main.appendChild(deleteSelectedButton);
+
+function deleteSelectFunciton(){
+  const selected = document.querySelector('.selected');
+  selected.remove();
+}
+
+deleteSelectedButton.addEventListener('click', deleteSelectFunciton);
